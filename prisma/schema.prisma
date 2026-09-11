@@ -9,7 +9,7 @@ datasource db {
 }
 
 model MenuCategory {
-  id           String     @id
+  id           String     @id @default(uuid())
   restaurantId String
   name         String
   sortOrder    Int        @default(0)
@@ -18,7 +18,7 @@ model MenuCategory {
 }
 
 model MenuItem {
-  id           String       @id
+  id           String       @id @default(uuid())
   categoryId   String
   name         String
   description  String?
@@ -30,7 +30,7 @@ model MenuItem {
 }
 
 model Order {
-  id           String      @id
+  id           String      @id @default(uuid())
   tableId      String
   browserToken String
   status       OrderStatus @default(PENDING)
@@ -42,7 +42,7 @@ model Order {
 }
 
 model OrderItem {
-  id         String   @id
+  id         String   @id @default(uuid())
   orderId    String
   menuItemId String
   quantity   Int
@@ -53,7 +53,7 @@ model OrderItem {
 }
 
 model Payment {
-  id          String        @id
+  id          String        @id @default(uuid())
   orderId     String        @unique
   amount      Decimal       @db.Decimal(10, 2)
   provider    String        @default("iyzico")
@@ -64,7 +64,7 @@ model Payment {
 }
 
 model Restaurant {
-  id           String         @id
+  id           String         @id @default(uuid())
   name         String
   createdAt    DateTime       @default(now())
   MenuCategory MenuCategory[]
@@ -72,7 +72,7 @@ model Restaurant {
 }
 
 model Table {
-  id           String     @id
+  id           String     @id @default(uuid())
   restaurantId String
   label        String
   qrToken      String     @unique
